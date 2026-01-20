@@ -1,0 +1,7 @@
+node_modules/
+7.3/jest/node_modules/
+7.3/playwright/node_modules/
+7.3/jest/coverage/
+.DS_Store
+/test-results/
+/playwright-report/
