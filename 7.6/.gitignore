@@ -1,0 +1,17 @@
+# Зависимости
+node_modules/
+
+# Видео и скриншоты Cypress
+cypress/videos/
+cypress/screenshots/
+
+# Логи ошибок npm
+npm-debug.log*
+*.log
+
+# Папки с результатами тестов
+cypress/reports/
+
+# Системные файлы Windows / macOS
+.DS_Store
+Thumbs.db

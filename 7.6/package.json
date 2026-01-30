@@ -4,11 +4,15 @@
   "description": "first tests with Cypress",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:desktop": "cypress run --browser chrome --config viewportWidth=1366,viewportHeight=768",
+    "test:mobile": "cypress run --browser firefox --headless --config viewportWidth=375,viewportHeight=812",
+    "open:desktop": "cypress open --browser chrome --config viewportWidth=1366,viewportHeight=768",
+    "open:mobile": "cypress open --config viewportWidth=375,viewportHeight=812"
   },
   "author": "OM",
   "license": "ISC",
-  "dependencies": {
-    "cypress": "^8.3.0"
+  "devDependencies": {
+    "cypress": "^15.9.0"
   }
 }
