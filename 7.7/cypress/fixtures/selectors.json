@@ -1,0 +1,20 @@
+{
+  "mainPage": {
+    "title": "h1.page-header__title",
+    "days": ".page-nav__day",
+    "movieSection": ".movie",
+    "movieTitle": ".movie__title",
+    "showtimes": ".movie-seances__time"
+  },
+  "booking": {
+    "row": ".buying-scheme__row",
+    "freeSeat": ".buying-scheme__chair_standart:not(.buying-scheme__chair_taken)",
+    "bookBtn": ".acceptin-button"
+  },
+  "admin": {
+    "login": "input[name='email']",
+    "password": "input[name='password']",
+    "submit": "input.login__button",
+    "hallTitle": ".conf-step__header-title"
+  }
+}
