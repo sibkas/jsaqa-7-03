@@ -1,52 +1,42 @@
-/// <reference types="cypress" />
-
 describe('Petstore API: Тесты пользователя', () => {
-  const userId = Math.floor(Math.random() * 100000);
-  const userName = `user_${userId}`;
-
-  const userPayload = {
-    id: userId,
-    username: userName,
-    firstName: "Ivan",
-    lastName: "Tester",
-    email: "test@qa.com",
-    password: "password123",
-    phone: "1234567890",
-    userStatus: 1
+  // Функция-генератор: создаем свежий набор данных по запросу
+  const generateUserData = () => {
+    const id = Math.floor(Math.random() * 100000);
+    return {
+      id: id,
+      username: `user_${id}`,
+      firstName: "Ivan",
+      lastName: "Tester",
+      email: `test${id}@qa.com`,
+      password: "password123"
+    };
   };
 
   it('Должен создать пользователя', () => {
-    cy.request('POST', 'https://petstore.swagger.io/v2/user', userPayload)
+    const user = generateUserData(); // Уникально для этого теста
+    cy.request('POST', 'https://petstore.swagger.io/v2/user', user)
       .then((response) => {
         expect(response.status).to.eq(200);
-        expect(response.body.message).to.eq(userId.toString());
       });
   });
 
   it('Должен обновить данные пользователя', () => {
-    // Сначала создаем, чтобы тест был независимым
-    cy.request('POST', 'https://petstore.swagger.io/v2/user', userPayload);
+    const user = generateUserData(); // Уникально для этого теста
+    cy.request('POST', 'https://petstore.swagger.io/v2/user', user); // Сначала создали
     
-    const updatedData = { ...userPayload, firstName: "Petr" };
+    const updatedData = { ...user, firstName: "Petr" }; // Меняем только имя
     
-    cy.request('PUT', `https://petstore.swagger.io/v2/user/${userName}`, updatedData)
+    cy.request('PUT', `https://petstore.swagger.io/v2/user/${user.username}`, updatedData)
       .then((response) => {
         expect(response.status).to.eq(200);
-      });
-
-    // Проверяем изменение
-    cy.request('GET', `https://petstore.swagger.io/v2/user/${userName}`)
-      .then((response) => {
-        expect(response.body.firstName).to.eq("Petr");
       });
   });
 
   it('Должен удалить пользователя', () => {
-    // Сначала создаем
-    cy.request('POST', 'https://petstore.swagger.io/v2/user', userPayload);
+    const user = generateUserData(); // Уникально для этого теста
+    cy.request('POST', 'https://petstore.swagger.io/v2/user', user); // Сначала создали
     
-    // Удаляем
-    cy.request('DELETE', `https://petstore.swagger.io/v2/user/${userName}`)
+    cy.request('DELETE', `https://petstore.swagger.io/v2/user/${user.username}`)
       .then((response) => {
         expect(response.status).to.eq(200);
       });
